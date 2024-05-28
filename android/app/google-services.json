@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "170779542490",
+    "firebase_url": "https://rekayasasti-tracci-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "rekayasasti-tracci",
+    "storage_bucket": "rekayasasti-tracci.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170779542490:android:c6700109932d627f59f6e3",
+        "android_client_info": {
+          "package_name": "com.example.tracci"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0cdz-1owf0epv04XUTImPiuyrS8R6zIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170779542490:android:c7b4a8e295894de959f6e3",
+        "android_client_info": {
+          "package_name": "com.tr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0cdz-1owf0epv04XUTImPiuyrS8R6zIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
