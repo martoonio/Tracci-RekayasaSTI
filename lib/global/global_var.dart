@@ -6,9 +6,14 @@ import 'package:geolocator/geolocator.dart';
 DatabaseReference carsListAvailable =
     FirebaseDatabase.instance.ref().child("cars");
 
+final crashHistoryList =
+    FirebaseDatabase.instance.ref().child("crash");
+
 String userName = "";
 String userID = FirebaseAuth.instance.currentUser!.uid;
 String userEmail = FirebaseAuth.instance.currentUser!.email!;
+
+String googleMapKey = "AIzaSyDlN7pUZ_oPhroD-gHODW-f6uQ1sR6fH4Y";
 
 final audioPlayer = AssetsAudioPlayer();
 

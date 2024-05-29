@@ -1,23 +1,29 @@
+import 'dart:async';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reksti/constants.dart';
 import 'package:reksti/global/global_var.dart';
 import 'package:reksti/methods/common_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:reksti/models/crash_detail.dart';
 
-class NotificationDialog extends StatefulWidget {
-  CrashDetails? crashDetailsInfo;
+import 'loading_dialog.dart';
 
-  NotificationDialog({
+class CobaDialog extends StatefulWidget {
+  // CrashDetails? crashDetailsInfo;
+
+  CobaDialog({
     super.key,
-    this.crashDetailsInfo,
+    // this.crashDetailsInfo,
   });
 
   @override
-  State<NotificationDialog> createState() => _NotificationDialogState();
+  State<CobaDialog> createState() => _CobaDialogState();
 }
 
-class _NotificationDialogState extends State<NotificationDialog> {
+class _CobaDialogState extends State<CobaDialog> {
   String tripRequestStatus = "";
   CommonMethods cMethods = CommonMethods();
 
@@ -130,7 +136,7 @@ class _NotificationDialogState extends State<NotificationDialog> {
                     ),
                     Expanded(
                       child: Text(
-                        "${widget.crashDetailsInfo?.platNomor.toString()} (${widget.crashDetailsInfo!.carModel})",
+                        "B 1234 ABC (Honda Brio)",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: GoogleFonts.jost(
@@ -160,7 +166,7 @@ class _NotificationDialogState extends State<NotificationDialog> {
                     ),
                     Expanded(
                       child: Text(
-                        "${widget.crashDetailsInfo!.crashLatLng!.latitude}, ${widget.crashDetailsInfo!.crashLatLng!.longitude}",
+                        "6°55′41.124″LS,107°46′13.62″BT",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: GoogleFonts.jost(

@@ -11,10 +11,13 @@ import 'package:reksti/constants.dart';
 import 'package:reksti/details/view_details.dart';
 import 'package:reksti/global/car_var.dart';
 import 'package:reksti/global/global_var.dart';
+import 'package:reksti/models/crash_detail.dart';
 import 'package:reksti/pushNotification/push_notification_system.dart';
 import 'package:reksti/screen/cars_list__screen.dart';
 import 'package:reksti/screen/regist_car_screen.dart';
+import 'package:reksti/screen/warning_history_screen.dart';
 import 'package:reksti/widget/drawer.dart';
+import 'package:reksti/widgets/coba_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -63,9 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     statusSubscription = driverTripStatusRef.onValue.listen((event) {
       var snapshot = event.snapshot;
-      PushNotificationSystem.retrieveTripRequestInfo(
-          snapshot.value.toString(), context);
-      print(snapshot);
+      if (!(event.snapshot.value == "idle")) {
+        PushNotificationSystem.retrieveTripRequestInfo(
+            snapshot.value.toString(), context);
+        print("ini snapshot value${event.snapshot.value}");
+      }
+      return;
     });
   }
 
@@ -81,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .child(FirebaseAuth.instance.currentUser!.uid)
         .child("status");
     initStatus.set("idle");
-
+    fetchCrashDetails();
     listenToTripRequestStatus();
   }
 
@@ -127,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegistCarScreen(),
+                      builder: (context) => const WarningHistoryScreen(),
                     ),
                   );
                 },

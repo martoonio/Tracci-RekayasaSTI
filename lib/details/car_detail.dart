@@ -56,7 +56,7 @@ class DetailsScreen extends StatelessWidget {
             ),
           ),
           Container(
-            height: kIsWeb ? height * 0.35 : height * 0.235,
+            height: kIsWeb ? height * 0.35 : height * 0.25,
             width: kIsWeb ? 500 : double.infinity,
             padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Column(

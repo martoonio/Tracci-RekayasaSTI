@@ -53,7 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!context.mounted) return;
 
-      Navigator.pop(context);
+      // Jika Anda memiliki dialog loading, pastikan untuk menutupnya sebelum navigasi
+      // Navigator.pop(context);  // Pastikan dialog loading telah ditutup
 
       if (userFirebase != null) {
         DatabaseReference usersRef = FirebaseDatabase.instance
@@ -65,11 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
           if (snap.snapshot.value != null) {
             userName = (snap.snapshot.value as Map)["name"];
             userEmail = (snap.snapshot.value as Map)["email"];
-            kIsWeb
-                ? Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => const HomeScreen()))
-                : Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => const HomeScreen()));
+
+            // Navigasi ke home screen
+            Navigator.pushReplacementNamed(context, '/home');
           } else {
             FirebaseAuth.instance.signOut();
             cMethods.displaySnackBar(
@@ -80,7 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
     } catch (errorMsg) {
       if (!context.mounted) return;
 
-      Navigator.pop(context);
       cMethods.displaySnackBar(errorMsg.toString(), context);
     }
   }
@@ -108,20 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              // const SizedBox(
-              //   height: 40,
-              // ),
-
-              // Image.asset(
-              //   "images/cover.png",
-              //   width: 220,
-              // ),
-
               const SizedBox(
                 height: 30,
               ),
-
-              //text fields + button
               Padding(
                 padding: const EdgeInsets.all(22),
                 child: Column(

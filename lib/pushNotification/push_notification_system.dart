@@ -9,7 +9,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-class PushNotificationSystem {  
+class PushNotificationSystem {
   FirebaseMessaging firebaseCloudMessaging = FirebaseMessaging.instance;
 
   Future<String?> generateDeviceRegistrationToken() async {
@@ -62,7 +62,8 @@ class PushNotificationSystem {
     });
   }
 
-  static retrieveTripRequestInfo(String crashID, BuildContext context) {
+  static retrieveTripRequestInfo(String crashID, BuildContext context) async {
+    // Show loading dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -70,43 +71,76 @@ class PushNotificationSystem {
           LoadingDialog(messageText: "getting details..."),
     );
 
-    // Navigator.pop(context);
+    try {
+      DatabaseReference tripRequestsRef =
+          FirebaseDatabase.instance.ref().child("crash").child(crashID);
 
-    DatabaseReference crashRef =
-        FirebaseDatabase.instance.ref().child("crash").child(crashID);
+      tripRequestsRef.once().then((DatabaseEvent event) {
+        DataSnapshot dataSnapshot =
+            event.snapshot; // Dapatkan DataSnapshot dari event
 
-    crashRef.once().then((dataSnapshot) {
-      Navigator.pop(context);
+        // Check if context is still mounted before attempting to pop
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
 
-      audioPlayer.open(
-        Audio("audio/notif.mp3"),
-      );
+        audioPlayer.open(
+          Audio("audio/notif.mp3"),
+        );
 
-      audioPlayer.play();
+        audioPlayer.play();
 
-      CrashDetails crashDetailsInfo = CrashDetails();
-      double crashLat = double.parse(
-          (dataSnapshot.snapshot.value! as Map)["crashLatLng"]["latitude"]);
-      double crashLng = double.parse(
-          (dataSnapshot.snapshot.value! as Map)["crashLatLng"]["longitude"]);
-      crashDetailsInfo.crashLatLng = LatLng(crashLat, crashLng);
+        CrashDetails crashDetailsInfo = CrashDetails();
 
-      crashDetailsInfo.crashAddress =
-          (dataSnapshot.snapshot.value! as Map)["crashAddress"];
+        if (dataSnapshot.value != null) {
+          Map<String, dynamic> valueMap =
+              Map<String, dynamic>.from(dataSnapshot.value as Map);
 
-      crashDetailsInfo.carModel =
-          (dataSnapshot.snapshot.value! as Map)["carModel"];
-      crashDetailsInfo.platNomor =
-          (dataSnapshot.snapshot.value! as Map)["platNomor"];
+          if (valueMap.containsKey("latitude") &&
+              valueMap.containsKey("longitude")) {
+            double crashLat = valueMap["latitude"];
+            double crashLng = valueMap["longitude"];
+            crashDetailsInfo.crashLatLng = LatLng(crashLat, crashLng);
+          }
 
-      crashDetailsInfo.crashID = crashID;
+          if (valueMap.containsKey("platNomor")) {
+            String carNum = valueMap["platNomor"];
+            crashDetailsInfo.platNomor = carNum;
+          }
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => NotificationDialog(
-          crashDetailsInfo: crashDetailsInfo,
-        ),
-      );
-    });
+          if (valueMap.containsKey("model")) {
+            String carModel = valueMap["model"];
+            crashDetailsInfo.carModel = carModel;
+          }
+
+          // Optional: Uncomment if crashAddress is needed
+          // if (valueMap.containsKey("crashAddress")) {
+          //   crashDetailsInfo.crashAddress = valueMap["crashAddress"];
+          // }
+        } else {
+          print("No data found for crashID: $crashID");
+          // Handle the case where no data is found for the given crashID
+        }
+
+        crashDetailsInfo.crashID = crashID;
+
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => NotificationDialog(
+            crashDetailsInfo: crashDetailsInfo,
+          ),
+        );
+      }).catchError((error) {
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
+        print("Error retrieving trip request info: $error");
+      });
+    } catch (error) {
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+      print("Error retrieving trip request info: $error");
+    }
   }
 }
