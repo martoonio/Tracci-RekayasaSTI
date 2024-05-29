@@ -23,7 +23,6 @@ class _NotificationDialogState extends State<NotificationDialog> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -219,7 +218,7 @@ class _NotificationDialogState extends State<NotificationDialog> {
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: whiteColor,
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: kPrimaryColor,
                             width: 2,
                           ),

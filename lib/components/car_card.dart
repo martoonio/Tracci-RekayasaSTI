@@ -1,19 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:reksti/global/global_var.dart';
 
 import '../constants.dart';
 import '../global/car_var.dart';
 
 class CarCard extends StatelessWidget {
   const CarCard({
-    Key? key,
+    super.key,
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.cars,
     required this.onPress,
-  }) : super(key: key);
+  });
 
   final double width, aspectRetio;
   final CarsList cars;

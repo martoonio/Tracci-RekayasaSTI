@@ -1,20 +1,13 @@
-import 'dart:async';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reksti/constants.dart';
 import 'package:reksti/global/global_var.dart';
 import 'package:reksti/methods/common_methods.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:reksti/models/crash_detail.dart';
-
-import 'loading_dialog.dart';
 
 class CobaDialog extends StatefulWidget {
   // CrashDetails? crashDetailsInfo;
 
-  CobaDialog({
+  const CobaDialog({
     super.key,
     // this.crashDetailsInfo,
   });
@@ -29,7 +22,6 @@ class _CobaDialogState extends State<CobaDialog> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -225,7 +217,7 @@ class _CobaDialogState extends State<CobaDialog> {
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: whiteColor,
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: kPrimaryColor,
                             width: 2,
                           ),

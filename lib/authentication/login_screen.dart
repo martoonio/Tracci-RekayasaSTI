@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ import 'package:reksti/authentication/signup_screen.dart';
 import 'package:reksti/constants.dart';
 import 'package:reksti/global/global_var.dart';
 import 'package:reksti/methods/common_methods.dart';
-import 'package:reksti/screen/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

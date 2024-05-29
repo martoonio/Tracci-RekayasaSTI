@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reksti/components/car_card.dart';
 import 'package:reksti/constants.dart';
@@ -14,13 +13,11 @@ import 'package:reksti/global/global_var.dart';
 import 'package:reksti/models/crash_detail.dart';
 import 'package:reksti/pushNotification/push_notification_system.dart';
 import 'package:reksti/screen/cars_list__screen.dart';
-import 'package:reksti/screen/regist_car_screen.dart';
 import 'package:reksti/screen/warning_history_screen.dart';
 import 'package:reksti/widget/drawer.dart';
-import 'package:reksti/widgets/coba_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -69,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
       if (!(event.snapshot.value == "idle")) {
         PushNotificationSystem.retrieveTripRequestInfo(
             snapshot.value.toString(), context);
-        print("ini snapshot value${event.snapshot.value}");
       }
       return;
     });
