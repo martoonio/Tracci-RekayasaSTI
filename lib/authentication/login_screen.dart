@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _passwordVisible
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                                 onPressed: () {
                                   setState(() {
