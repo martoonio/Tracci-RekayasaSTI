@@ -8,6 +8,8 @@ DatabaseReference carsListAvailable =
 final crashHistoryList =
     FirebaseDatabase.instance.ref().child("crash");
 
+DatabaseReference admins = FirebaseDatabase.instance.ref().child("admins");
+
 String userName = "";
 String userID = FirebaseAuth.instance.currentUser!.uid;
 String userEmail = FirebaseAuth.instance.currentUser!.email!;

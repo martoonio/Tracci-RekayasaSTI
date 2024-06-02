@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reksti/constants.dart';
+import 'package:reksti/details/view_details.dart';
+import 'package:reksti/global/car_var.dart';
 import 'package:reksti/global/global_var.dart';
 import 'package:reksti/methods/common_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:reksti/models/crash_detail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NotificationDialog extends StatefulWidget {
   CrashDetails? crashDetailsInfo;
@@ -20,6 +24,7 @@ class NotificationDialog extends StatefulWidget {
 class _NotificationDialogState extends State<NotificationDialog> {
   String tripRequestStatus = "";
   CommonMethods cMethods = CommonMethods();
+  // CarsList? car;
 
   @override
   void initState() {
@@ -183,6 +188,13 @@ class _NotificationDialogState extends State<NotificationDialog> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
+                        launchUrl(
+                          Uri.parse("tel://110"),
+                        );
+                        admins
+                            .child(FirebaseAuth.instance.currentUser!.uid)
+                            .child("status")
+                            .set("idle");
                         Navigator.pop(context);
                         audioPlayer.stop();
                       },
@@ -209,12 +221,11 @@ class _NotificationDialogState extends State<NotificationDialog> {
                     child: ElevatedButton(
                       onPressed: () {
                         audioPlayer.stop();
-
-                        setState(() {
-                          tripRequestStatus = "accepted";
-                        });
-
-                        checkAvailabilityOfTripRequest(context);
+                        admins
+                            .child(FirebaseAuth.instance.currentUser!.uid)
+                            .child("status")
+                            .set("idle");
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: whiteColor,

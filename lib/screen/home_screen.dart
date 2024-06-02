@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 .add(CarsList.fromMap(Map<String, dynamic>.from(value), key));
           }
         });
-      } else {}
+      }
     });
   }
 
@@ -48,11 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
     notificationSystem.generateDeviceRegistrationToken();
     notificationSystem.startListeningForNewNotification(context);
   }
-
-  // retrieveCurrentPosition() async {
-  //   crashPosition = await Geolocator.getCurrentPosition(
-  //       desiredAccuracy: LocationAccuracy.high) as Position?;
-  // }
 
   void listenToTripRequestStatus() {
     DatabaseReference driverTripStatusRef = FirebaseDatabase.instance
@@ -63,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     statusSubscription = driverTripStatusRef.onValue.listen((event) {
       var snapshot = event.snapshot;
-      if (!(event.snapshot.value == "idle")) {
+      if (!(snapshot.value == "idle")) {
         PushNotificationSystem.retrieveTripRequestInfo(
             snapshot.value.toString(), context);
       }
@@ -76,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     retrieveCarsData();
     initializePushNotificationSystem();
-    // retrieveCurrentPosition();
     DatabaseReference initStatus = FirebaseDatabase.instance
         .ref()
         .child("admins")
@@ -88,10 +82,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    statusSubscription?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    // print("ini crash position $crashPosition");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,

@@ -117,20 +117,34 @@ class ViewDetails extends StatelessWidget {
               return meetings;
             }
 
-            crashLatLng = crashDetailsList
-                .firstWhere((element) => element.carID == car.key)
-                .crashLatLng;
+            // Pastikan crashDetailsList tidak kosong dan memiliki elemen yang sesuai
+            if (crashDetailsList.isNotEmpty) {
+              CrashDetails? firstCrashDetail = crashDetailsList.firstWhere(
+                  (element) => element.carID == car.key,
+                  orElse: () => CrashDetails(
+                      crashID: '',
+                      carID: '',
+                      crashLatLng: LatLng(0, 0),
+                      carModel: '',
+                      platNomor: '',
+                      date: ''));
 
-            markers.add(
-              Marker(
-                markerId: const MarkerId("crashLocation"),
-                position: crashLatLng!,
-                infoWindow: InfoWindow(
-                  title: "Crash Location",
-                  snippet: car.platNomor,
-                ),
-              ),
-            );
+              // Periksa apakah firstCrashDetail valid
+              if (firstCrashDetail.carID!.isNotEmpty) {
+                crashLatLng = firstCrashDetail.crashLatLng;
+
+                markers.add(
+                  Marker(
+                    markerId: const MarkerId("crashLocation"),
+                    position: crashLatLng!,
+                    infoWindow: InfoWindow(
+                      title: "Crash Location",
+                      snippet: car.platNomor,
+                    ),
+                  ),
+                );
+              }
+            }
 
             return Column(
               children: [
