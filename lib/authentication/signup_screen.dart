@@ -112,7 +112,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: const EdgeInsets.all(22),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: kIsWeb
+                      ? CrossAxisAlignment.center
+                      : CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Hello!",
