@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reksti/authentication/login_screen.dart';
@@ -110,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Padding(
                 padding: const EdgeInsets.all(22),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -121,9 +122,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
                     Text(
                       "Welcome to tracci",
                       style: GoogleFonts.jost(
@@ -135,208 +133,233 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 22,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Username",
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        TextFormField(
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(50)
-                          ],
-                          decoration: InputDecoration(
-                            hintText: "Enter your username",
-                            hintStyle: GoogleFonts.jost(
-                              fontSize: 13,
-                              color: Colors.grey,
-                              fontWeight: normal,
-                            ),
-                            filled: true,
-                            fillColor: whiteColor,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                  color: kSecondaryColor),
-                            ),
-                          ),
-                          onChanged: (text) => setState(() {
-                            userNameTextEditingController.text = text;
-                          }),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Email",
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        TextFormField(
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(50)
-                          ],
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            hintStyle: GoogleFonts.jost(
-                              fontSize: 13,
-                              color: Colors.grey,
-                              fontWeight: normal,
-                            ),
-                            filled: true,
-                            fillColor: whiteColor,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                  color: kSecondaryColor),
-                            ),
-                          ),
-                          onChanged: (text) => setState(() {
-                            emailTextEditingController.text = text;
-                          }),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Password",
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        TextFormField(
-                          obscureText: !_passwordVisible,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(50)
-                          ],
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            hintStyle: GoogleFonts.jost(
-                              fontSize: 13,
-                              color: Colors.grey,
-                              fontWeight: normal,
-                            ),
-                            filled: true,
-                            fillColor: whiteColor,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                  color: kSecondaryColor),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("Username",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Container(
+                              width: 400,
+                              height: 50,
+                              child: TextFormField(
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(50)
+                                ],
+                                decoration: InputDecoration(
+                                  hintText: "Enter your username",
+                                  hintStyle: GoogleFonts.jost(
+                                    fontSize: 15,
+                                    color: Colors.grey,
+                                    fontWeight: normal,
+                                  ),
+                                  filled: true,
+                                  fillColor: whiteColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        width: 0,
+                                        style: BorderStyle.none,
+                                        color: kSecondaryColor),
+                                  ),
+                                ),
+                                onChanged: (text) => setState(() {
+                                  userNameTextEditingController.text = text;
+                                }),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
                             ),
-                          ),
-                          onChanged: (text) => setState(() {
-                            passwordTextEditingController.text = text;
-                          }),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Confirm Password",
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        TextFormField(
-                          obscureText: !_passwordVisible,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(50)
                           ],
-                          decoration: InputDecoration(
-                            hintText: "Confirm Password",
-                            hintStyle: GoogleFonts.jost(
-                              fontSize: 13,
-                              color: Colors.grey,
-                              fontWeight: normal,
-                            ),
-                            filled: true,
-                            fillColor: whiteColor,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                  color: kSecondaryColor),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Email",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Container(
+                              width: 400,
+                              height: 50,
+                              child: TextFormField(
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(50)
+                                ],
+                                decoration: InputDecoration(
+                                  hintText: "Email",
+                                  hintStyle: GoogleFonts.jost(
+                                    fontSize: 15,
+                                    color: Colors.grey,
+                                    fontWeight: normal,
+                                  ),
+                                  filled: true,
+                                  fillColor: whiteColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        width: 0,
+                                        style: BorderStyle.none,
+                                        color: kSecondaryColor),
+                                  ),
+                                ),
+                                onChanged: (text) => setState(() {
+                                  emailTextEditingController.text = text;
+                                }),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Password",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Container(
+                              width: 400,
+                              height: 50,
+                              child: TextFormField(
+                                obscureText: !_passwordVisible,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(50)
+                                ],
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle: GoogleFonts.jost(
+                                    fontSize: 15,
+                                    color: Colors.grey,
+                                    fontWeight: normal,
+                                  ),
+                                  filled: true,
+                                  fillColor: whiteColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        width: 0,
+                                        style: BorderStyle.none,
+                                        color: kSecondaryColor),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordVisible = !_passwordVisible;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                onChanged: (text) => setState(() {
+                                  passwordTextEditingController.text = text;
+                                }),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Confirm Password",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Container(
+                              width: 400,
+                              height: 50,
+                              child: TextFormField(
+                                obscureText: !_passwordVisible,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(50)
+                                ],
+                                decoration: InputDecoration(
+                                  hintText: "Confirm Password",
+                                  hintStyle: GoogleFonts.jost(
+                                    fontSize: 15,
+                                    color: Colors.grey,
+                                    fontWeight: normal,
+                                  ),
+                                  filled: true,
+                                  fillColor: whiteColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        width: 0,
+                                        style: BorderStyle.none,
+                                        color: kSecondaryColor),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordVisible = !_passwordVisible;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                onChanged: (text) => setState(() {
+                                  confirmPasswordTextEditingController.text =
+                                      text;
+                                }),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              checkIfNetworkIsAvailable();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: kPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: const BorderSide(color: Colors.white)),
+                              minimumSize: const Size(200, 50),
+                            ),
+                            child: Text(
+                              "Sign Up",
+                              selectionColor: kSecondaryColor,
+                              style: GoogleFonts.poppins(
+                                  color: whiteColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
-                          onChanged: (text) => setState(() {
-                            confirmPasswordTextEditingController.text = text;
-                          }),
                         ),
                       ],
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          checkIfNetworkIsAvailable();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kPrimaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: const BorderSide(color: Colors.white)),
-                          minimumSize: const Size(200, 50),
-                        ),
-                        child: Text(
-                          "Sign Up",
-                          selectionColor: kSecondaryColor,
-                          style: GoogleFonts.poppins(
-                              color: whiteColor, fontWeight: FontWeight.bold),
-                        ),
-                      ),
                     ),
                   ],
                 ),

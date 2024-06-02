@@ -109,114 +109,107 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(22),
                 child: Column(
                   key: _formKey,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Email",
-                        style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: bold)),
-                    TextFormField(
-                      controller: emailTextEditingController,
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                      ),
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(50),
-                      ],
-                      decoration: InputDecoration(
-                        hintText: "Enter Your Email",
-                        hintStyle: GoogleFonts.jost(
-                          fontSize: 13,
-                          color: Colors.grey,
-                          fontWeight: normal,
-                        ),
-                        filled: true,
-                        fillColor: whiteColor,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                            color: Colors.white,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Email",
+                            style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: bold)),
+                        Container(
+                          width: 400,
+                          height: 50,
+                          child: TextFormField(
+                            controller: emailTextEditingController,
+                            style: GoogleFonts.poppins(
+                              color: Colors.black,
+                            ),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(50),
+                            ],
+                            decoration: InputDecoration(
+                              hintText: "Enter Your Email",
+                              hintStyle: GoogleFonts.jost(
+                                fontSize: 15,
+                                color: Colors.grey,
+                                fontWeight: normal,
+                              ),
+                              filled: true,
+                              fillColor: whiteColor,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     const SizedBox(
                       height: 22,
                     ),
-                    Text("Password",
-                        style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: bold)),
-                    TextFormField(
-                      obscureText: !_passwordVisible,
-                      controller: passwordTextEditingController,
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                      ),
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(50),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Password",
+                            style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: bold)),
+                        Container(
+                          width: 400,
+                          height: 50,
+                          child: TextFormField(
+                            obscureText: !_passwordVisible,
+                            controller: passwordTextEditingController,
+                            style: GoogleFonts.poppins(
+                              color: Colors.black,
+                            ),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(50),
+                            ],
+                            decoration: InputDecoration(
+                              hintText: "Enter Your Password",
+                              hintStyle: GoogleFonts.jost(
+                                fontSize: 15,
+                                color: Colors.grey,
+                                fontWeight: normal,
+                              ),
+                              filled: true,
+                              fillColor: whiteColor,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
-                      decoration: InputDecoration(
-                        hintText: "Enter Your Password",
-                        hintStyle: GoogleFonts.jost(
-                          fontSize: 13,
-                          color: Colors.grey,
-                          fontWeight: normal,
-                        ),
-                        filled: true,
-                        fillColor: whiteColor,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                            color: Colors.white,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => ForgotPassword(),
-                          //   ),
-                          // );
-                        },
-                        child: Text(
-                          "Forgot Password?",
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            color: Colors.white,
-                            decoration: TextDecoration.underline,
-                            decorationStyle: TextDecorationStyle.solid,
-                            decorationColor: Colors.white,
-                          ),
-                        ),
-                      ),
                     ),
                     const SizedBox(
                       height: 30,
