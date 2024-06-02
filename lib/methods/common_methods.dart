@@ -10,9 +10,7 @@ class CommonMethods {
         // ignore: unrelated_type_equality_checks
         connectionResult != ConnectivityResult.wifi) {
       if (!context.mounted) return;
-      displaySnackBar(
-          "your Internet is not Available. Check your connection. Try Again.",
-          context);
+      displaySnackBar("Please wait...", context);
     }
   }
 

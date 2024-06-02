@@ -38,5 +38,24 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpROO3WN04QMGym0iheu5RNFs-6zqoQT0",
+      authDomain: "rekayasasti-tracci.firebaseapp.com",
+      databaseURL: "https://rekayasasti-tracci-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "rekayasasti-tracci",
+      storageBucket: "rekayasasti-tracci.appspot.com",
+      messagingSenderId: "170779542490",
+      appId: "1:170779542490:web:e1347032f1e8220359f6e3",
+      measurementId: "G-6JTZYWTPJ9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </body>
 </html>

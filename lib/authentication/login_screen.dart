@@ -84,34 +84,38 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kPrimaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: whiteColor,
-        elevation: 0,
-        title: Text(
-          "RideWave",
-          style: GoogleFonts.roboto(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
+        backgroundColor: kPrimaryColor,
       ),
-      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(
+              Text("tracci",
+                  style: GoogleFonts.poppins(
+                    fontSize: 80,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  )),
+              SizedBox(
                 height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.all(22),
                 child: Column(
                   key: _formKey,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text("Email",
+                        style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: bold)),
                     TextFormField(
                       controller: emailTextEditingController,
                       style: GoogleFonts.poppins(
@@ -122,11 +126,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                       decoration: InputDecoration(
                         hintText: "Enter Your Email",
-                        hintStyle: GoogleFonts.poppins(
-                          color: Colors.white,
+                        hintStyle: GoogleFonts.jost(
+                          fontSize: 13,
+                          color: Colors.grey,
+                          fontWeight: normal,
                         ),
                         filled: true,
-                        fillColor: kPrimaryColor,
+                        fillColor: whiteColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
@@ -135,15 +141,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.white,
-                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 22,
                     ),
+                    Text("Password",
+                        style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: bold)),
                     TextFormField(
                       obscureText: !_passwordVisible,
                       controller: passwordTextEditingController,
@@ -155,11 +162,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                       decoration: InputDecoration(
                         hintText: "Enter Your Password",
-                        hintStyle: GoogleFonts.poppins(
-                          color: Colors.white,
+                        hintStyle: GoogleFonts.jost(
+                          fontSize: 13,
+                          color: Colors.grey,
+                          fontWeight: normal,
                         ),
                         filled: true,
-                        fillColor: kSecondaryColor,
+                        fillColor: whiteColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
@@ -167,10 +176,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: BorderStyle.none,
                             color: Colors.white,
                           ),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.key,
-                          color: Colors.white,
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -206,35 +211,41 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            decorationStyle: TextDecorationStyle.solid,
+                            decorationColor: Colors.white,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 60,
+                      height: 30,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        checkIfNetworkIsAvailable();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF054C67),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(
-                            color: Colors.white,
-                            width: 3,
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          checkIfNetworkIsAvailable();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                              color: whiteColor,
+                              width: 3,
+                            ),
                           ),
+                          minimumSize: const Size(200, 50),
                         ),
-                        minimumSize: const Size(200, 50),
-                      ),
-                      child: Text(
-                        "Login",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          letterSpacing: 2.2,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                        child: Text(
+                          "Login",
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            letterSpacing: 2.2,
+                            fontWeight: FontWeight.bold,
+                            color: whiteColor,
+                          ),
                         ),
                       ),
                     ),
@@ -248,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     "Doesn't have an account? ",
                     style: GoogleFonts.poppins(
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -265,7 +276,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Register!",
                       style: GoogleFonts.poppins(
                         fontSize: 12,
-                        color: const Color.fromRGBO(255, 255, 255, 1),
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
