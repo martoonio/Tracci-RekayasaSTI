@@ -7,6 +7,7 @@ import 'package:reksti/details/car_detail.dart';
 import 'package:reksti/details/view_details.dart';
 import 'package:reksti/firebase_options.dart';
 import 'package:reksti/screen/home_screen.dart';
+import 'package:reksti/screen/profile_screen.dart';
 import 'package:reksti/screen/warning_history_screen.dart';
 
 Future<void> main() async {
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/view': (context) => ViewDetails(),
         '/home': (context) => const HomeScreen(),
         '/warning_history': (context) => const WarningHistoryScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
     );
   }

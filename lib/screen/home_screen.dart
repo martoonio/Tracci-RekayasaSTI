@@ -25,6 +25,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DatabaseReference cars = FirebaseDatabase.instance.ref().child("cars");
+  DatabaseReference admin = FirebaseDatabase.instance.ref().child("admins");
+
   StreamSubscription<DatabaseEvent>? statusSubscription;
 
   void retrieveCarsData() {
@@ -40,6 +42,18 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         });
       }
+    });
+  }
+
+  fetchAdminData() async {
+    await FirebaseDatabase.instance
+        .ref()
+        .child("admins")
+        .child(FirebaseAuth.instance.currentUser!.uid)
+        .once()
+        .then((snap) {
+      adminName = (snap.snapshot.value as Map)["name"];
+      adminEmail = (snap.snapshot.value as Map)["email"];
     });
   }
 
@@ -77,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .child(FirebaseAuth.instance.currentUser!.uid)
         .child("status");
     initStatus.set("idle");
+    fetchAdminData();
     fetchCrashDetails();
     listenToTripRequestStatus();
   }
@@ -110,11 +125,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         title: Text(
-          'Tracci',
+          'tracci',
           style: GoogleFonts.lalezar(
             fontSize: 24,
             fontWeight: FontWeight.normal,
             color: whiteColor,
+            wordSpacing: 1,
           ),
         ),
       ),

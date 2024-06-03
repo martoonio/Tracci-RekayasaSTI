@@ -20,9 +20,7 @@ final audioPlayer = AssetsAudioPlayer();
 
 // Position? crashPosition;
 
-String carName = "";
-String carModel = "";
-String carNumber = "";
-String carYear = "";
+String adminName = "";
+String adminEmail = "";
 
 Map<String, dynamic> carsMap = {};
